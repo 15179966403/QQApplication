@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="50dp"
+    android:background="@color/colorPrimary">
+    <com.hrc.qqapplication.CircleImageView
+        android:id="@+id/imageview"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        app:civ_border_width="0dp"
+        android:src="@drawable/user_image"/>
+    <TextView
+        android:id="@+id/action_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:text="消息"/>
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true">
+        <ImageView
+            android:id="@+id/main_message"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="visible"
+            android:src="@android:drawable/ic_input_add" />
+        <TextView
+            android:id="@+id/main_user"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="添加"/>
+        <TextView
+            android:id="@+id/main_user_star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:text="更多"/>
+    </FrameLayout>
+
+
+</RelativeLayout>
