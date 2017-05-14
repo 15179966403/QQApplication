@@ -16,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -41,7 +42,8 @@ public class MainActivity extends FragmentActivity {
     //消息列表
     private MessageAdapter messageAdapter;
     private List<Message> list_message=new ArrayList<>();
-    private ListView listView;
+    private MessageListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class MainActivity extends FragmentActivity {
         main_message= (ImageView) findViewById(R.id.main_message);
         main_user= (TextView) findViewById(R.id.main_user);
         main_user_star= (TextView) findViewById(R.id.main_user_star);
-        listView= (ListView) findViewById(R.id.listview);
+        listView= (MessageListView) findViewById(R.id.listview);
 
         LinearLayout l1= (LinearLayout) findViewById(R.id.menu_item_vip);
         left_menu[0]=l1;
@@ -105,7 +107,12 @@ public class MainActivity extends FragmentActivity {
         }
         messageAdapter=new MessageAdapter(this,R.layout.message_item_layout,list_message);
         listView.setAdapter(messageAdapter);
+        listView.setPullRefreshEnable(true);
+        listView.setXListViewListener(listViewListener);
+        listView.setOnItemClickListener(messageItemClick);
     }
+
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener listener=new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -181,4 +188,30 @@ public class MainActivity extends FragmentActivity {
         main_user_star.setVisibility(View.GONE);
         view.setVisibility(View.VISIBLE);
     }
+
+    private MessageListView.IXListViewListener listViewListener=new MessageListView.IXListViewListener() {
+        @Override
+        public void onRefresh() {
+            //加载数据
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+            //加载完毕
+            listView.stopRefresh();
+        }
+    };
+
+    private AdapterView.OnItemClickListener messageItemClick=new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //消息点击事件处理
+        }
+    };
 }
